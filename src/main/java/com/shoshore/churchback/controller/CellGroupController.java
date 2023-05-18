@@ -3,7 +3,7 @@ package com.shoshore.churchback.controller;
 import com.shoshore.churchback.entity.CellGroup;
 import com.shoshore.churchback.model.CellGroupRequest;
 import com.shoshore.churchback.repository.CellGroupRepository;
-import com.shoshore.churchback.services.CellGroupService;
+import com.shoshore.churchback.services.cellGroup.CellGroupService;
 import com.shoshore.churchback.util.CustomerResponse;
 import com.shoshore.churchback.util.RequestResponse;
 import org.springframework.beans.factory.annotation.Autowired;

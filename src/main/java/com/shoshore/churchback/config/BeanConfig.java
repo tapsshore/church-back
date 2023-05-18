@@ -1,8 +1,11 @@
 package com.shoshore.churchback.config;
 
 import com.shoshore.churchback.repository.CellGroupRepository;
-import com.shoshore.churchback.services.CellGroupService;
-import com.shoshore.churchback.services.CellGroupServiceImpl;
+import com.shoshore.churchback.repository.ChurchMemberRepository;
+import com.shoshore.churchback.services.cellGroup.CellGroupService;
+import com.shoshore.churchback.services.cellGroup.CellGroupServiceImpl;
+import com.shoshore.churchback.services.churchMember.ChurchMemberService;
+import com.shoshore.churchback.services.churchMember.ChurchMemberServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -18,5 +21,10 @@ public class BeanConfig {
     @Bean
     public CellGroupService cellGroupService(CellGroupRepository cellGroupRepository) {
         return new CellGroupServiceImpl(cellGroupRepository);
+    }
+
+    @Bean
+    ChurchMemberService churchMemberService(ChurchMemberRepository churchMemberRepository, CellGroupRepository cellGroupRepository) {
+        return new ChurchMemberServiceImpl(churchMemberRepository, cellGroupRepository);
     }
 }

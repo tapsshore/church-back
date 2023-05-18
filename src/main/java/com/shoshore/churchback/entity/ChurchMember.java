@@ -25,7 +25,8 @@ public class ChurchMember {
     private String email;
     private String mobileNumber;
     private String address;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cell_group_id")
     private CellGroup cellGroup;
     @Enumerated(EnumType.STRING)
     private Role role;

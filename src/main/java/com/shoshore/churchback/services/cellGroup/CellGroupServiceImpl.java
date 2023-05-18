@@ -1,4 +1,4 @@
-package com.shoshore.churchback.services;
+package com.shoshore.churchback.services.cellGroup;
 
 import com.shoshore.churchback.entity.CellGroup;
 import com.shoshore.churchback.model.CellGroupRequest;
