@@ -7,7 +7,6 @@ import com.shoshore.churchback.services.CellGroupService;
 import com.shoshore.churchback.util.CustomerResponse;
 import com.shoshore.churchback.util.RequestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,6 +67,7 @@ public class CellGroupController {
             return RequestResponse.getBADResponse("Cell Group with ID " + id + " not available");
         }
     }
+
     @GetMapping("/search")
     public ResponseEntity<List<CellGroup>> findByAnyField(@RequestParam("keyword") String keyword) {
         List<CellGroup> cellGroups = cellGroupRepository.findByCellGroupNameContainingIgnoreCase(keyword);

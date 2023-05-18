@@ -7,7 +7,6 @@ import com.shoshore.churchback.util.CustomerResponse;
 import com.shoshore.churchback.util.RequestResponse;
 import com.shoshore.churchback.util.ValidationUtil;
 import com.shoshore.churchback.util.cellGroup.CellGroupConverter;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @created : 18/5/2023, Thursday
  **/
 @Service
-public class CellGroupServiceImpl implements CellGroupService{
+public class CellGroupServiceImpl implements CellGroupService {
 
     private final CellGroupRepository cellGroupRepository;
 
@@ -32,7 +31,7 @@ public class CellGroupServiceImpl implements CellGroupService{
         ValidationUtil.validateFieldPresent(cellGroupRequest, "email");
         String phoneNumber = cellGroupRequest.getPhoneNumber();
         String email = cellGroupRequest.getEmail();
-        String cellGroupName =cellGroupRequest.getCellGroupName();
+        String cellGroupName = cellGroupRequest.getCellGroupName();
         if (cellGroupRepository.existsByPhoneNumber(phoneNumber)) {
             String errorMessage = "A cell group with the same phone number already exists.";
             return RequestResponse.getBADResponse(errorMessage);
@@ -51,8 +50,9 @@ public class CellGroupServiceImpl implements CellGroupService{
         cellGroup = cellGroupRepository.save(cellGroup);
         return RequestResponse.getOKResponse(CellGroupConverter.convert(cellGroup));
     }
-    private CellGroup prepareCellGroupRequest(CellGroupRequest cellGroupRequest){
-        CellGroup cellGroup =  new CellGroup();
+
+    private CellGroup prepareCellGroupRequest(CellGroupRequest cellGroupRequest) {
+        CellGroup cellGroup = new CellGroup();
         cellGroup.setCellGroupName(cellGroupRequest.getCellGroupName());
         cellGroup.setLocation(cellGroupRequest.getLocation());
         cellGroup.setEmail(cellGroupRequest.getEmail());

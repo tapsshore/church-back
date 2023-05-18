@@ -2,10 +2,8 @@ package com.shoshore.churchback.entity;
 
 import com.shoshore.churchback.enums.Role;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 /**
  * @author : tapiwanasheshoshore
@@ -18,7 +16,8 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class ChurchMember {    private String firstName;
+public class ChurchMember {
+    private String firstName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

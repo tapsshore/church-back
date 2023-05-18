@@ -2,9 +2,7 @@ package com.shoshore.churchback.util.cellGroup;
 
 import com.shoshore.churchback.entity.ChurchMember;
 import lombok.Data;
-import lombok.ToString;
 
-import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 

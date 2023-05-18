@@ -5,7 +5,7 @@ package com.shoshore.churchback.exceptions;
  * @mailto : tapsshore@gmail.com
  * @created : 18/5/2023, Thursday
  **/
-public class ValidationException extends RuntimeException{
+public class ValidationException extends RuntimeException {
     private final String fieldName;
 
     public ValidationException(String fieldName, String message) {

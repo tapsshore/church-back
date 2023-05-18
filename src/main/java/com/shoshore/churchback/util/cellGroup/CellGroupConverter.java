@@ -8,7 +8,7 @@ import com.shoshore.churchback.entity.CellGroup;
  * @created : 18/5/2023, Thursday
  **/
 public class CellGroupConverter {
-    public static CreateCellGroupResponse convert(CellGroup cellGroup){
+    public static CreateCellGroupResponse convert(CellGroup cellGroup) {
         final CreateCellGroupResponse createCellGroupResponse = new CreateCellGroupResponse();
         createCellGroupResponse.setId(cellGroup.getId());
         createCellGroupResponse.setCellGroupName(cellGroup.getCellGroupName());

@@ -12,11 +12,15 @@ import java.util.List;
  * @created : 18/5/2023, Thursday
  **/
 @Repository
-public interface CellGroupRepository extends JpaRepository<CellGroup,Long> {
+public interface CellGroupRepository extends JpaRepository<CellGroup, Long> {
     List<CellGroup> findByCellGroupNameContainingIgnoreCase(String keyword);
+
     List<CellGroup> findByLocationContainingIgnoreCase(String keyword);
+
     List<CellGroup> findByPhoneNumberContainingIgnoreCase(String keyword);
+
     List<CellGroup> findByEmailContainingIgnoreCase(String keyword);
+
     boolean existsByPhoneNumber(String phoneNumber);
 
     boolean existsByEmail(String email);

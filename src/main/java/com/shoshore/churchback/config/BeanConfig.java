@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 public class BeanConfig {
     @Bean
-    public CellGroupService cellGroupService(CellGroupRepository cellGroupRepository){
+    public CellGroupService cellGroupService(CellGroupRepository cellGroupRepository) {
         return new CellGroupServiceImpl(cellGroupRepository);
     }
 }
