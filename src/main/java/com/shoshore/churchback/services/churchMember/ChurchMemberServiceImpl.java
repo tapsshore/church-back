@@ -64,4 +64,5 @@ public class ChurchMemberServiceImpl implements ChurchMemberService {
         churchMember.setCellGroup(cellGroup);
         return churchMember;
     }
+
 }

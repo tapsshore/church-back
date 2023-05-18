@@ -17,6 +17,6 @@ public class CreateChurchMemberResponse {
     private String email;
     private String mobileNumber;
     private String address;
-    private CellGroup cellGroup;
+    private Long cellGroupId;
     private Role role;
 }

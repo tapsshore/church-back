@@ -1,19 +1,22 @@
 package com.shoshore.churchback.controller;
 
 import com.shoshore.churchback.entity.ChurchMember;
-import com.shoshore.churchback.enums.Role;
 import com.shoshore.churchback.exceptions.ChurchException;
 import com.shoshore.churchback.model.ChurchMemberRequest;
 import com.shoshore.churchback.repository.ChurchMemberRepository;
 import com.shoshore.churchback.services.churchMember.ChurchMemberService;
 import com.shoshore.churchback.util.CustomerResponse;
 import com.shoshore.churchback.util.RequestResponse;
+import com.shoshore.churchback.util.churchMember.ChurchMemberConverter;
+import com.shoshore.churchback.util.churchMember.CreateChurchMemberResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author : tapiwanasheshoshore
@@ -34,17 +37,15 @@ public class ChurchMemberController {
         return churchMemberService.createChurchMember(churchMemberRequest);
     }
 
-    @GetMapping
-    public ResponseEntity<List<ChurchMember>> getAllCellGroups() {
+    @GetMapping("/all")
+@ResponseBody
+    List<CreateChurchMemberResponse> getAllChurchMembers() {
         List<ChurchMember> churchMembers = churchMemberRepository.findAll();
-        return ResponseEntity.ok(churchMembers);
+        return churchMembers.stream()
+                .map(ChurchMemberConverter::convert)
+                .collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
-    public ResponseEntity<ChurchMember> getChurchMemberById(@PathVariable Long id) {
-        Optional<ChurchMember> churchMember = churchMemberRepository.findById(id);
-        return churchMember.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<ChurchMember> updateChurchMember(@PathVariable Long id, @RequestBody ChurchMember churchMemberData) {
@@ -77,13 +78,18 @@ public class ChurchMemberController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<ChurchMember>> findByAnyField(@RequestParam("keyword") String keyword) {
+    public ResponseEntity<List<CreateChurchMemberResponse>> findByAnyField(@RequestParam("keyword") String keyword) {
         List<ChurchMember> churchMembers = churchMemberRepository.findByFirstNameContainingIgnoreCase(keyword);
         churchMembers.addAll(churchMemberRepository.findByLastNameContainingIgnoreCase(keyword));
         churchMembers.addAll(churchMemberRepository.findByMobileNumberContainingIgnoreCase(keyword));
         churchMembers.addAll(churchMemberRepository.findByEmailContainingIgnoreCase(keyword));
-        churchMembers.addAll(churchMemberRepository.findByRole(Role.valueOf(keyword)));
 
-        return ResponseEntity.ok(churchMembers);
+        List<CreateChurchMemberResponse> responseList = new ArrayList<>();
+        for (ChurchMember churchMember : churchMembers) {
+            CreateChurchMemberResponse response = ChurchMemberConverter.convert(churchMember);
+            responseList.add(response);
+        }
+
+        return ResponseEntity.ok(responseList);
     }
 }
