@@ -19,7 +19,6 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 public class CellGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,17 +30,4 @@ public class CellGroup {
     @OneToMany(mappedBy = "cellGroup")
     @ToString.Exclude
     private List<ChurchMember> churchMembers = new ArrayList<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        CellGroup cellGroup = (CellGroup) o;
-        return getId() != null && Objects.equals(getId(), cellGroup.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

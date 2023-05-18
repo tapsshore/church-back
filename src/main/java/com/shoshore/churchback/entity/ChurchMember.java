@@ -18,7 +18,6 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 public class ChurchMember {    private String firstName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,17 +30,4 @@ public class ChurchMember {    private String firstName;
     private CellGroup cellGroup;
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ChurchMember that = (ChurchMember) o;
-        return getId() != null && Objects.equals(getId(), that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }
