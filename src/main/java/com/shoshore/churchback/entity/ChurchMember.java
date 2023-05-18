@@ -1,11 +1,11 @@
 package com.shoshore.churchback.entity;
 
 import com.shoshore.churchback.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * @author : tapiwanasheshoshore
@@ -13,7 +13,10 @@ import javax.persistence.*;
  * @created : 18/5/2023, Thursday
  **/
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChurchMember {    private String firstName;
@@ -28,4 +31,17 @@ public class ChurchMember {    private String firstName;
     private CellGroup cellGroup;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        ChurchMember that = (ChurchMember) o;
+        return getId() != null && Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
