@@ -10,6 +10,7 @@ import com.shoshore.churchback.util.CustomerResponse;
 import com.shoshore.churchback.util.RequestResponse;
 import com.shoshore.churchback.util.ValidationUtil;
 import com.shoshore.churchback.util.churchMember.ChurchMemberConverter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author : tapiwanasheshoshore
@@ -19,16 +20,20 @@ import com.shoshore.churchback.util.churchMember.ChurchMemberConverter;
 public class ChurchMemberServiceImpl implements ChurchMemberService {
     private final ChurchMemberRepository churchMemberRepository;
     private final CellGroupRepository cellGroupRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public ChurchMemberServiceImpl(ChurchMemberRepository churchMemberRepository, CellGroupRepository cellGroupRepository) {
+    public ChurchMemberServiceImpl(ChurchMemberRepository churchMemberRepository, CellGroupRepository cellGroupRepository, PasswordEncoder passwordEncoder) {
         this.churchMemberRepository = churchMemberRepository;
         this.cellGroupRepository = cellGroupRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public CustomerResponse createChurchMember(ChurchMemberRequest churchMemberRequest) throws ChurchException {
         ValidationUtil.validateFieldPresent(churchMemberRequest, "firstName");
         ValidationUtil.validateFieldPresent(churchMemberRequest, "lastName");
+        ValidationUtil.validateFieldPresent(churchMemberRequest, "username");
+        ValidationUtil.validateFieldPresent(churchMemberRequest, "password");
         ValidationUtil.validateFieldPresent(churchMemberRequest, "email");
         ValidationUtil.validateFieldPresent(churchMemberRequest, "mobileNumber");
         ValidationUtil.validateFieldPresent(churchMemberRequest, "address");
@@ -46,7 +51,11 @@ public class ChurchMemberServiceImpl implements ChurchMemberService {
             String errorMessage = "A church member with the same email already exists.";
             return RequestResponse.getBADResponse(errorMessage);
         }
+// Hash the password
+        String hashedPassword = passwordEncoder.encode(churchMemberRequest.getPassword());
+
         ChurchMember churchMember = prepareChurchMemberRequest(churchMemberRequest);
+        churchMember.setPassword(hashedPassword); // Set the hashed password
         churchMember = churchMemberRepository.save(churchMember);
         return RequestResponse.getOKResponse(ChurchMemberConverter.convert(churchMember));
     }

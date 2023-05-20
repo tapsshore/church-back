@@ -24,4 +24,6 @@ public class ChurchMemberRequest {
     private String address;
     private Long cellGroupId;
     private Role role;
+    private String username;
+    private String password;
 }

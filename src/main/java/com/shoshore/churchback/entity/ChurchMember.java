@@ -30,4 +30,6 @@ public class ChurchMember {
     private CellGroup cellGroup;
     @Enumerated(EnumType.STRING)
     private Role role;
+    private String username;
+    private String password;
 }

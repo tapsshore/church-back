@@ -9,6 +9,7 @@ import com.shoshore.churchback.services.churchMember.ChurchMemberServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @author : tapiwanasheshoshore
@@ -24,7 +25,7 @@ public class BeanConfig {
     }
 
     @Bean
-    ChurchMemberService churchMemberService(ChurchMemberRepository churchMemberRepository, CellGroupRepository cellGroupRepository) {
-        return new ChurchMemberServiceImpl(churchMemberRepository, cellGroupRepository);
+    ChurchMemberService churchMemberService(ChurchMemberRepository churchMemberRepository, CellGroupRepository cellGroupRepository, PasswordEncoder passwordEncoder) {
+        return new ChurchMemberServiceImpl(churchMemberRepository, cellGroupRepository, passwordEncoder);
     }
 }
