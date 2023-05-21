@@ -15,3 +15,6 @@ spring:
           new_generator_mappings: false
 server:
   port: 8086
+logging:
+  level:
+    org.springframework.security: DEBUG
