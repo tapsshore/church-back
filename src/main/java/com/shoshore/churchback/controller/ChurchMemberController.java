@@ -1,9 +1,9 @@
 package com.shoshore.churchback.controller;
 
 import com.shoshore.churchback.entity.ChurchMember;
-import com.shoshore.churchback.exceptions.ChurchException;
-import com.shoshore.churchback.model.ChurchMemberRequest;
+import com.shoshore.churchback.model.CellGroupRequest;
 import com.shoshore.churchback.repository.ChurchMemberRepository;
+import com.shoshore.churchback.services.cellGroup.CellGroupService;
 import com.shoshore.churchback.services.churchMember.ChurchMemberService;
 import com.shoshore.churchback.util.CustomerResponse;
 import com.shoshore.churchback.util.RequestResponse;
@@ -31,14 +31,17 @@ public class ChurchMemberController {
     @Autowired
     ChurchMemberService churchMemberService;
 
+    @Autowired
+    CellGroupService cellGroupService;
+
     @PostMapping
-    @ResponseBody
-    public CustomerResponse createChurchMember(@RequestBody ChurchMemberRequest churchMemberRequest) throws ChurchException {
-        return churchMemberService.createChurchMember(churchMemberRequest);
+    public ResponseEntity<CustomerResponse> createCellGroup(@RequestBody CellGroupRequest cellGroupRequest) {
+        CustomerResponse response = cellGroupService.createCellGroup(cellGroupRequest);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/all")
-@ResponseBody
+    @ResponseBody
     List<CreateChurchMemberResponse> getAllChurchMembers() {
         List<ChurchMember> churchMembers = churchMemberRepository.findAll();
         return churchMembers.stream()
@@ -56,7 +59,6 @@ public class ChurchMemberController {
             churchMember.setLastName(churchMemberData.getLastName());
             churchMember.setMobileNumber(churchMemberData.getMobileNumber());
             churchMember.setEmail(churchMemberData.getEmail());
-            churchMember.setRole(churchMemberData.getRole());
             churchMember.setAddress(churchMember.getAddress());
             churchMember.setCellGroup(churchMemberData.getCellGroup());
             ChurchMember updatedChurchMember = churchMemberRepository.save(churchMember);

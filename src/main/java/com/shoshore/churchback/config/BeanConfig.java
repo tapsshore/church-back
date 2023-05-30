@@ -2,6 +2,7 @@ package com.shoshore.churchback.config;
 
 import com.shoshore.churchback.repository.CellGroupRepository;
 import com.shoshore.churchback.repository.ChurchMemberRepository;
+import com.shoshore.churchback.repository.UserRepository;
 import com.shoshore.churchback.services.cellGroup.CellGroupService;
 import com.shoshore.churchback.services.cellGroup.CellGroupServiceImpl;
 import com.shoshore.churchback.services.churchMember.ChurchMemberService;
@@ -25,7 +26,10 @@ public class BeanConfig {
     }
 
     @Bean
-    ChurchMemberService churchMemberService(ChurchMemberRepository churchMemberRepository, CellGroupRepository cellGroupRepository, PasswordEncoder passwordEncoder) {
-        return new ChurchMemberServiceImpl(churchMemberRepository, cellGroupRepository, passwordEncoder);
+    ChurchMemberService churchMemberService(ChurchMemberRepository churchMemberRepository,
+                                            CellGroupRepository cellGroupRepository,
+                                            PasswordEncoder passwordEncoder,
+                                            UserRepository userRepository) {
+        return new ChurchMemberServiceImpl(churchMemberRepository, cellGroupRepository, passwordEncoder, userRepository);
     }
 }

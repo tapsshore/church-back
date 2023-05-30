@@ -1,6 +1,5 @@
 package com.shoshore.churchback.util.churchMember;
 
-import com.shoshore.churchback.entity.CellGroup;
 import com.shoshore.churchback.enums.Role;
 import lombok.Data;
 
@@ -11,9 +10,11 @@ import lombok.Data;
  **/
 @Data
 public class CreateChurchMemberResponse {
-    private String firstName;
     private Long id;
+    private String firstName;
     private String lastName;
+    private String username;
+    private String password;
     private String email;
     private String mobileNumber;
     private String address;

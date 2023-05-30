@@ -6,8 +6,18 @@ package com.shoshore.churchback.enums;
  * @created : 18/5/2023, Thursday
  **/
 public enum Role {
-    ADMIN,
-    USHER,
-    CLEANER,
-    GENERAL_MEMBER
+    ADMIN("ADMIN"),
+    USHER("USHER"),
+    CLEANER("CLEANER"),
+    GENERAL_MEMBER("GENERAL_MEMBER");
+
+    private final String roleName;
+
+    Role(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
 }

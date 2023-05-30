@@ -13,10 +13,12 @@ public class ChurchMemberConverter {
         createChurchMemberResponse.setId(churchMember.getId());
         createChurchMemberResponse.setFirstName(churchMember.getFirstName());
         createChurchMemberResponse.setLastName(churchMember.getLastName());
+        createChurchMemberResponse.setUsername(churchMember.getUsername());
+        createChurchMemberResponse.setPassword(churchMember.getPassword());
+        createChurchMemberResponse.setRole(churchMember.getRole());
         createChurchMemberResponse.setEmail(churchMember.getEmail());
         createChurchMemberResponse.setMobileNumber(churchMember.getMobileNumber());
         createChurchMemberResponse.setAddress(churchMember.getAddress());
-        createChurchMemberResponse.setRole(churchMember.getRole());
         createChurchMemberResponse.setCellGroupId(churchMember.getCellGroup().getId());
 
         return createChurchMemberResponse;

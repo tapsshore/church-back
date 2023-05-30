@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ChurchMemberRequest {
-    private Long id;
     private String firstName;
     private String lastName;
     private String email;

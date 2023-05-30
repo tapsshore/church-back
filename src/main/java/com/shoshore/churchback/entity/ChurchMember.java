@@ -17,19 +17,30 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class ChurchMember {
-    private String firstName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String firstName;
+
     private String lastName;
+    private String username;
+    private String password;
+
     private String email;
+
     private String mobileNumber;
+
     private String address;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cell_group_id")
     private CellGroup cellGroup;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Enumerated(EnumType.STRING)
     private Role role;
-    private String username;
-    private String password;
 }
